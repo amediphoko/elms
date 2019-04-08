@@ -1,0 +1,149 @@
+.nav-link[data-toggle].collapsed:after {
+    content: "▾";
+}
+
+.nav-link[data-toggle]:not(.collapsed):after {
+    content: "▴";
+}
+
+#sidebar {
+    min-height: 105vh;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+
+#sidebar .nav-link {
+    color: #fff;
+    font-weight: 100;
+    font-size: 15px;
+}
+
+#sidebar .nav-link:hover {
+    background-color: #c0e2dd;
+    color: black;
+}
+
+#sidebar .nav-link.active {
+    background-color: #6d8a85;
+    color: black;
+}
+
+#sidebar .nav-link span.active-span {
+    display: none;
+}
+
+#sidebar .nav-link.active span.active-span {
+    display: block;
+    float: right;
+    padding-top: 1.2px;
+    margin-right: -20px;
+    font-size: 1.3em;
+    color: #f5f8fa;
+}
+
+#sidebar > .sidebar-profile > .sidebar-profile-image img {
+    color: #fff;
+    border:2px solid black;
+    border-radius:50%;
+    margin-left: 34%;
+    min-width: 5em;
+    padding: .2em;
+}
+
+#sidebar > .sidebar-profile, #sidebar > .sidebar-profile > .sidebar-profile-info {
+    padding-top: 1.5em;
+    padding-bottom: 1em;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.bg-dark {
+    background-color: #343a40;
+}
+
+.navbar {
+    background-color: #52726d;
+}
+
+.navbar li a {
+    color: black;
+}
+
+/* Cards */
+
+.card,
+.card-panel {
+    background-color: #ffffff;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05), 
+        0 3px 1px -2px rgba(0, 0, 0, 0.08), 
+        0 1px 20px 0 rgba(0, 0, 0, 0.08);
+    position: relative;
+    padding: 1em;
+    padding-left:2em;
+}
+
+.stats-card {
+    padding: 0;
+}
+
+.card.card-transparent {
+    background: transparent;
+    box-shadow: none;
+}
+
+.card > .card-content > .card-title,
+.card-panel > .card-content > .card-title,
+.card > .card-reveal > .card-title {
+    line-height: 24px;
+    font-size: 25px;
+    font-weight: bold;
+    text-transform: capitalize;
+    display: block;
+    margin-bottom: 20px;
+    padding: 1em;
+    border-bottom: 1px #dbdbdb solid;
+    color: rgba(0,0,0,0.54);
+}
+
+.card .card-image .card-title {
+    color: #fff;
+}
+
+.card.white-text .card-title {
+    color: #fff;
+}
+
+.card .card-title i {
+    font-size: 22px;
+    line-height: 24px;
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+.card .card-options .badge {
+    right: 15px;
+    top: 20px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    text-shadow: none;
+    min-width: auto;
+}
+
+.panel .panel-body{
+    padding: 0;
+}
+
+.panel .list-group-flush .list-group-item {
+    border-radius:0;
+    border:none;
+    border-top:1px solid #d3d3d3;
+}
+
+#myTabContent {
+    padding-top: 2em;
+}
