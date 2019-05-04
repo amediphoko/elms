@@ -18,6 +18,25 @@
                 <div id="myTabContent" class="tab-content">
                     <div role="tabpanel" class="tab-pane fade active in" id="userinfo" aria-labelledby="userinfo-tab">
                         <div class="col-md-4">
+                            <div class="profile-image" style="padding-left:40px">
+                                @if ($user->pro_img == 'user-default.png')
+                                    <img src="{{asset('img/user-default.png')}}" id="output" class="output">
+                                @else
+                                    <img src="/storage/profile_pictures/{{$user->pro_img}}" id="output">
+                                @endif
+                                
+                                {!! Form::open(['action' => ['DashboardController@img_update', Auth::user()->id], 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
+                                    <input type="file" name="pro_img" id="pro_img"><br>
+                                    <label for="pro_img" style="cursor:pointer;margin-left:10px">
+                                        <i style="font-size:1.2em" class="fa fa-camera"></i> Change Image
+                                    </label>
+                                    {{Form::hidden('_method', 'PUT')}}
+                                    <button type="submit" class="btn btn-success pull-right">
+                                        <i class="fa fa-save"></i>
+                                    </button>
+                                {!! Form::close() !!}
+                            </div>
+                            <br>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Leave Summary</h3>

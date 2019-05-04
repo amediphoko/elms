@@ -46,6 +46,15 @@
             }
             $("#accordion1 a[href*='"+path+"']").addClass("active");
         });
+
+        document.getElementById("pro_img").onchange = function() {
+           var reader = new FileReader();
+
+           reader.onload = function(e) {
+               $('#output').attr('src', e.target.result);
+           };
+           reader.readAsDataURL(this.files[0]);
+       };
     </script>
 </body>
 </html>

@@ -28,6 +28,7 @@ Route::get('/applications', 'DashboardController@showApplications')->name('user.
 Route::get('/approved', 'DashboardController@showApproved')->name('user.approved');
 Route::get('/rejected', 'DashboardController@showRejected')->name('user.rejected');
 Route::get('/profile/{id}', 'DashboardController@profile')->name('user.profile');
+Route::put('/profile/image/{id}', 'DashboardController@img_update')->name('user.image.update');
 Route::get('/change_pass/{id}', 'DashboardController@change_pass');
 Route::put('/change_password/{id}', 'DashboardController@change_password');
 

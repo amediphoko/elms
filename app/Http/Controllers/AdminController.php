@@ -51,6 +51,8 @@ class AdminController extends Controller
         $this->validate($request, [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
+            'post' => 'required|string|max:191',
+            'scale' => 'required|string|max:1',
             'gender' => 'required|string|max:6',
             'dob' => 'required|date',
             'department' => 'required|string|max:255',
@@ -62,6 +64,8 @@ class AdminController extends Controller
         //$user->staff_id = $request->input('staff_id');
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
+        $user->post = $request->input('post');
+        $user->scale = $request->input('scale');
         $user->gender = $request->input('gender');
         $user->dob = $request->input('dob');
         $user->department = $request->input('department');

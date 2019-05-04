@@ -67,6 +67,37 @@ class DashboardController extends Controller
         return view('employee.profile')->with(['user' => $user, 'leaves' => $leaves, 'total_days'=> $total_days]);
     }
 
+    public function img_update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'pro_img' => 'image|required|max:1999',
+        ]);
+
+        if ($request->hasfile('pro_img')) {
+            //Get filename with the extension
+            $filenamewithExt = $request->file('pro_img')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenamewithExt, PATHINFO_FILENAME);
+            //Get just the ext
+            $extension = $request->file('pro_img')->getClientOriginalExtension();
+            //Filename to upload
+            $fileNameToUpload = $filename.'_'.time().'.'.$extension;
+            ///Upload Image
+            $path = $request->file('pro_img')->storeAs('public/profile_pictures', $fileNameToUpload);
+        }
+
+        $user = User::find($id);
+
+        if ($user->pro_img != 'user-default.png') {
+            Storage::delete('public/profile_pictures/'.$user->pro_img);
+        }
+
+        $user->pro_img = $fileNameToUpload;
+        $user->save();
+
+        return back()->with('success', 'Image successfully uploaded.');
+    }
+
     public function change_pass($id)
     {
         $user = User::find($id);

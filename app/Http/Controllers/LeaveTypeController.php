@@ -44,11 +44,15 @@ class LeaveTypeController extends Controller
         $this->validate($request, [
             'leavetype' => 'required',
             'description' => 'required',
+            'lower' => 'required',
+            'upper' => 'required'
         ]);
 
         $leavetype = new LeaveType;
         $leavetype->leave_type = $request->input('leavetype');
         $leavetype->description = $request->input('description');
+        $leavetype->lower = $request->input('lower');
+        $leavetype->upper = $request->input('upper');
         $leavetype->save();
 
         return redirect('/leavetype')->with('success', 'Leave type created');
@@ -90,11 +94,15 @@ class LeaveTypeController extends Controller
         $this->validate($request, [
             'leavetype' => 'required',
             'description' => 'required',
+            'lower' => 'required',
+            'upper' => 'required'
         ]);
 
         $leavetype = LeaveType::find($id);
         $leavetype->leave_type = $request->input('leavetype');
         $leavetype->description = $request->input('description');
+        $leavetype->lower = $request->input('lower');
+        $leavetype->upper = $request->input('upper');
         $leavetype->save();
 
         return redirect('/leavetype')->with('success', 'Leave Type Edited');

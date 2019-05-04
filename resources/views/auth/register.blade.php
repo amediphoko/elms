@@ -9,18 +9,7 @@
             <form method="POST" action="{{ route('register') }}">
                 {{ csrf_field() }}
 
-                <div class="col-md-4 form-group{{ $errors->has('staff_id') ? ' has-error' : '' }}">
-                    <label for="staff_id">Staff Id</label>
-                    <input id="staff_id" type="number" class="form-control" name="staff_id" value="{{ old('staff_id') }}" required autofocus>
-
-                    @if ($errors->has('staff_id'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('staff_id') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                <div class="col-md-6 form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                <div class="col-md-5 form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                     <label for="first_name" class="col-md-4 control-label">First Name</label>
                     <input id="first_name" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" required autofocus>
 
@@ -38,6 +27,28 @@
                     @if ($errors->has('last_name'))
                         <span class="help-block">
                             <strong>{{ $errors->first('last_name') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="col-md-3 form-group{{ $errors->has('post') ? ' has-error' : '' }}">
+                    <label for="post">Post</label>
+                    <input id="post" type="text" class="form-control" name="post" value="{{ old('post') }}" required autofocus>
+
+                    @if ($errors->has('post'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('post') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="col-md-2 form-group{{ $errors->has('staff_id') ? ' has-error' : '' }}">
+                    <label for="staff_id">Staff Id</label>
+                    <input id="staff_id" type="number" class="form-control" name="staff_id" value="{{ old('staff_id') }}" required autofocus>
+
+                    @if ($errors->has('staff_id'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('staff_id') }}</strong>
                         </span>
                     @endif
                 </div>
@@ -89,7 +100,35 @@
                     @endif
                 </div>
 
-                <div class="col-md-6 form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                <div class="col-md-2 form-group{{ $errors->has('ps_no') ? ' has-error' : '' }}">
+                    <label for="ps_no" class="col-md-8 control-label">P.S. No</label>
+                    <input id="ps_no" type="number" class="form-control" name="ps_no" value="{{ old('ps_no') }}" required autofocus>
+
+                    @if ($errors->has('ps_no'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('ps_no') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="col-md-2 form-group{{ $errors->has('scale') ? ' has-error' : '' }}">
+                    <label for="scale" class="col-md-4 control-label">Scale</label>
+                    <select name="scale" id="scale" class="form-control">
+                            <option value="">Scale</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>   
+                    </select>
+                    @if ($errors->has('scale'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('scale') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="col-md-3 form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                     <label for="address" class="col-md-4 control-label">Address</label>
                     <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required autofocus>
 

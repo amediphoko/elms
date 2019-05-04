@@ -11,7 +11,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th width="200">Employe Name</th>
+                                    <th width="200">Employee Name</th>
                                     <th width="120">Leave Type</th>
 
                                         <th width="180">Posting Date</th>                 

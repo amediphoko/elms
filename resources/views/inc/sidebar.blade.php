@@ -2,7 +2,13 @@
     @if(Auth::guard('web')->check() or Auth::guard('admin')->check())
         <div class="sidebar-profile">
             <div class="sidebar-profile-image">
-                <img src="{{asset('img/user-default.png')}}" class="circle" alt="img">
+                @if (Auth::guard('web')->check())
+                    @if (Auth::user()->pro_img == 'user-default.png')
+                        <img src="{{asset('img/user-default.png')}}" class="img-circle" width="100em" height="100em">
+                    @else
+                        <img src="/storage/profile_pictures/{{Auth::user()->pro_img}}" class="img-circle" width="100em" height="100em">
+                    @endif
+                @endif
             </div>
             <div class="sidebar-profile-info" style="text-align:center">
                 @if (Auth::guard('web')->check())
