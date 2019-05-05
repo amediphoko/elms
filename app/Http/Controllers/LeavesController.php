@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Notifications\leaveApplication;
 use App\Leave;
 use App\Admin;
+use App\LeaveDay;
+use App\LeaveType;
 
 class LeavesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show', 'update', 'status']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'update', 'status', 'destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -44,7 +46,9 @@ class LeavesController extends Controller
      */
     public function create()
     {
-        return view('leaves.create');
+        $leavetypes = LeaveType::select('leave_type')->pluck('leave_type');
+
+        return view('leaves.create')->with('leavetypes', $leavetypes);
     }
 
     /**
@@ -64,6 +68,19 @@ class LeavesController extends Controller
             'attachments' => 'nullable',
         ]);
 
+        $to = \Carbon\Carbon::createFromFormat('Y-m-d', $request->input('to_date'));
+        $from = \Carbon\Carbon::createFromFormat('Y-m-d', $request->input('from_date'));
+        
+        if($request->input('type') == 'Maternity') {
+            $diff = $to->diffInDays($from) + 1;
+        }else {
+            $diff = $to->diffInWeekdays($from) + 1; 
+        }
+    
+        if($request->input('days_applied') != $diff) {
+            return back()->with('error', 'correct total days applied for');
+        }
+
         $user_id = auth()->user()->id;
 
         if ($request->input('type') == 'Sick' or $request->input('type') == 'Maternity') {
@@ -73,13 +90,33 @@ class LeavesController extends Controller
             ]);
         }
 
+        /** Check if user has enough leave days to apply for the leave */
+        $leavetype = $request->input('type');
+        $leavedays = 0;
+       
+        $leavetype_id = LeaveType::where('leave_type', $leavetype)->value('id');
+        $leavedays = LeaveDay::where('user_id', $user_id)
+                            ->where('leavetype_id', $leavetype_id)->value('days');
+
+        if ($leavedays > 0 and $leavedays > $request->input('days_applied')) {
+            //create new leave
+            $this->create_leave($request, $user_id);
+        }else {
+            return back()->with('error', 'You do not have enough '.$leavetype.' leave days. Remaining '.$leavedays);
+        }
+
+        return redirect('/applications')->with('success', 'Leave Application Submitted');
+    }
+
+    public function create_leave(Request $request, $user_id)
+    {
         if ($request->hasfile('attachments')) {
             foreach($request->file('attachments') as $file){
                 $name = $file->getClientOriginalName();
                 $filename = pathinfo($name, PATHINFO_FILENAME);
                 $extension = $file->getClientOriginalExtension();
                 $fileToUpload = $filename.'_'.time().'.'.$extension;
-                $path = $file->storeAs('public/attachements', $fileToUpload);
+                $path = $file->storeAs('public/attachments', $fileToUpload);
                 $files[] = $fileToUpload;
             }
         }else {
@@ -99,8 +136,6 @@ class LeavesController extends Controller
 
         $admin = Admin::findOrFail(1);
         $admin->notify(new leaveApplication(auth()->user()));
-
-        return redirect('/applications')->with('success', 'Leave Application Submitted');
     }
 
     /**
@@ -116,17 +151,23 @@ class LeavesController extends Controller
         return view('leaves.show')->with('leave', $leave);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function remaining_days($leave)
     {
-        //
+        $leavetype_id = LeaveType::where('leave_type', $leave->type)->value('id');
+        $applied_days = $leave->days_applied;
+        $available_days = LeaveDay::where('user_id', $leave->user_id)
+                                ->where('leavetype_id', $leavetype_id)->value('days');
+
+        $leaveday_id = LeaveDay::where('user_id', $leave->user_id)
+                            ->where('leavetype_id', $leavetype_id)->value('id');
+
+        $remaining = $available_days - $applied_days;
+        $leaveday = LeaveDay::find($leaveday_id);
+        $leaveday->days = $remaining;
+        $leaveday->save();
     }
 
+    
     /**
      * Update the specified resource in storage.
      *
@@ -141,6 +182,7 @@ class LeavesController extends Controller
         $leave->save();
 
         if ($request->input('status') == 1) {
+            $this->remaining_days($leave);
             return redirect('/leaves')->with('success', 'Leave Approved');
         } else {
             return redirect('/leaves')->with('error', 'Leave Rejected');
@@ -155,6 +197,13 @@ class LeavesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $leave = Leave::find($id);
+        $leave->delete();
+        if ($leave->attachments != null) {
+            foreach(json_decode($leave->attachments) as $attachment) {
+                Storage::delete('public/attachments/'.$attachment);
+            }
+        }
+        return back()->with('success', 'Leave Deleted');
     }
 }

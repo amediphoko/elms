@@ -19,6 +19,7 @@ Route::resource('leaves', 'LeavesController');
 
 Route::resource('departments', 'DepartmentsController');
 Route::resource('leavetype', 'LeaveTypeController');
+Route::resource('leavedays', 'LeaveDaysController');
 
 Auth::routes();
 

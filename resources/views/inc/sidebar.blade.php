@@ -15,8 +15,8 @@
                     <p>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</p>
                     <span>Staff Id: {{Auth::user()->staff_id}}</span>
                 @else
-                    <h5>Admin</h5>
-                    <p>{{Auth::guard('admin')->user()->name}}</p>
+                    <h4 style="font-weight:600">Administrator</h4>
+                    <p style="font-weight:600">{{Auth::guard('admin')->user()->name}}</p>
                 @endif  
             </div>
         </div>

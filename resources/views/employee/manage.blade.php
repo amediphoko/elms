@@ -16,6 +16,7 @@
                                 <th>Status</th>
                                 <th>Reg Date</th>
                                 <th>Action</th>
+                                <th>Days</th>
                             </thead>
                             <?php $count = 1; ?>
                             <tbody>
@@ -31,6 +32,11 @@
                                         <td>{{$user->created_at->toDateString()}}</td>
                                         <td>
                                             <a href="/users/{{$user->id}}/edit"><i class="fa fa-edit"></i> Edit</a>   
+                                        </td>
+                                        <td>
+                                            @if (count($ids->where('user_id', $user->id)) == 0)
+                                                @include('inc.adddays')
+                                            @endif
                                         </td>
                                     </tr>
                                     <?php $count++; ?>

@@ -74,7 +74,7 @@
     <div class="container">
         <div class="content">
             <div class="title m-b-md">
-                Employee Leave Management System
+                Nanogang Leave Management System
             </div>
             
             <div class="links">

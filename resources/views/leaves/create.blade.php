@@ -8,12 +8,18 @@
                 {!! Form::open(['action' => 'LeavesController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
                     <div class="col-md-4 form-group">
                         {{Form::label('type', 'Leave Type')}}
-                        {{Form::select('type', array('Annual' => 'Annual', 'Sick' => 'Sick', 'Maternity' => 'Maternity', 'Compassionate' => 'Compassionate',
-                        'Study' => 'Study', 'Unpaid' => 'Unpaid'), 'Annual', ['class' => 'form-control'])}}
+                        @if (count($leavetypes) > 0)
+                            <select name="type" id="type" class="form-control">
+                                    <option value="">LeaveType..</option>
+                                    @foreach ($leavetypes as $leavetype)
+                                        <option value="{{$leavetype}}">{{$leavetype}}</option>
+                                    @endforeach
+                            </select>
+                        @endif
                     </div>
                     <div class="col-md-3 form-group">
                         {{Form::label('from_date', 'From Date')}}
-                        {{Form::date('from_date', '', ['class' => 'form-control', 'placeholder' => 'From Date'])}}
+                        {{Form::date('from_date', '', ['class' => 'form-control', 'placeholder' => 'From Date', 'id' => 'from'])}}
                     </div>
                     <div class="col-md-3 form-group">
                         {{Form::label('to_date', 'To Date (inclusive)')}}
@@ -25,11 +31,11 @@
                     </div>
                     <div class="col-md-3 form-group">
                         {{Form::label('days_applied', 'Total Days Applied For')}}
-                        {{Form::number('days_applied', '', ['class' => 'form-control', 'placeholder' => '# of days'])}}
+                        {{Form::number('days_applied', '', ['class' => 'form-control', 'placeholder' => '# of days', 'id' => 'days_applied'])}}
                     </div>
                     <div class="col-md-10 form-group">
                         {{Form::label('description', 'Reasons for application')}}
-                        {{Form::textarea('description', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Job Description'])}}
+                        {{Form::textarea('description', '', ['id' => 'article-ckeditor', 'class' => 'form-control desc', 'placeholder' => 'Job Description'])}}
                     </div>
                     <div class="col-md-3">
                         {{Form::submit('APPLY', ['class' => 'btn btn-primary'])}}

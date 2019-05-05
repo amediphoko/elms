@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\LeaveDay;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -50,7 +51,6 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'staff_id' => 'required|unique:users',
             'post' => 'required|string|max:191',
-            'ps_no' => 'required|unique:users',
             'scale' => 'required|string|max:1',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -75,7 +75,6 @@ class RegisterController extends Controller
         return User::create([
             'staff_id' => $data['staff_id'],
             'post' => $data['post'],
-            'ps_no' => $data['ps_no'],
             'scale' => $data['scale'],
             'pro_img' => 'user-default.png',
             'first_name' => $data['first_name'],

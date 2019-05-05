@@ -1,12 +1,7 @@
 {!! Form::open(['action' => ['AdminController@update_profile', $user->id], 'method' => 'POST']) !!}
     {{ csrf_field() }}
 
-    <div class="col-md-4 form-group{{ $errors->has('staff_id') ? ' has-error' : '' }}">
-        <label for="staff_id">Staff Id </label>
-        <input id="staff_id" type="number" class="form-control" name="staff_id" value="{{$user->staff_id}}" readonly>
-    </div>
-
-    <div class="col-md-6 form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+    <div class="col-md-5 form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
         <label for="first_name" class="col-md-4 control-label">First Name</label>
         <input id="first_name" type="text" class="form-control" name="first_name" value="{{$user->first_name}}" required autofocus>
     </div>
@@ -14,6 +9,16 @@
     <div class="col-md-5 form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
         <label for="last_name" class="col-md-6 control-label">Last Name</label>
         <input id="last_name" type="text" class="form-control" name="last_name" value="{{$user->last_name}}" required autofocus>
+    </div>
+
+    <div class="col-md-3 form-group{{ $errors->has('post') ? ' has-error' : '' }}">
+        <label for="post" class="col-md-6 control-label">Post</label>
+        <input id="post" type="text" class="form-control" name="post" value="{{$user->post}}" required autofocus>
+    </div>
+
+    <div class="col-md-2 form-group{{ $errors->has('staff_id') ? ' has-error' : '' }}">
+        <label for="staff_id">Staff Id </label>
+        <input id="staff_id" type="number" class="form-control" name="staff_id" value="{{$user->staff_id}}" readonly>
     </div>
 
     <div class="col-md-2 form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
@@ -50,8 +55,20 @@
         </select>
     </div>
 
-    <div class="col-md-6 form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-        <label for="address" class="col-md-4 control-label">Address</label>
+    <div class="col-md-2 form-group{{ $errors->has('scale') ? ' has-error' : '' }}">
+        <label for="scale" class="col-md-4 control-label">Scale</label>
+        <select name="scale" id="scale" class="form-control">
+                <option value="{{$user->scale}}">{{$user->scale}}</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>   
+        </select>
+    </div>
+
+    <div class="col-md-5 form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+        <label for="address" class="col-md-6 control-label">Physical Address</label>
         <input id="address" type="text" class="form-control" name="address" value="{{$user->address}}" required autofocus>
     </div>
 

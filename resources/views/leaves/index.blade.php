@@ -36,7 +36,18 @@
                                                 <i class="fa fa-circle" style="color:red"></i> Rejected
                                             @endif
                                         </td>
-                                        <td><a href="/leaves/{{$leave->id}}">View Details</a></td>
+                                        @if ($leave->status == 2)
+                                            <td>
+                                                {!!Form::open(['action' => ['LeavesController@destroy', $leave->id], 'method' => 'POST'])!!}
+                                                    {{Form::hidden('_method', 'DELETE')}}
+                                                    <i style="color:red" class="fa fa-trash">
+                                                        {{Form::submit(' Delete', ['style' => 'background-color:transparent; border:none; color:red; font-style:sans-serif', 'onclick' => 'return confirm(\'Are you sure you want to delete?\')'])}}
+                                                    </i>
+                                                {!!Form::close()!!}
+                                            </td>
+                                        @else
+                                            <td><a href="/leaves/{{$leave->id}}">View Details</a></td>
+                                        @endif
                                     </tr>
                                     <?php $count++; ?>
                                 @endforeach

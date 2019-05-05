@@ -56,13 +56,16 @@
                                             Rejected Applications <span class="badge">{{count($leaves->where('status', '=', 2))}}</span>
                                         </li>
                                         <li class="list-group-item">
-                                            Total Leave Day(s) <span class="badge">{{$total_days}}</span>
+                                            Total Day(s) used/year <span class="badge">{{$total_days}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Day(s) remaining/year <span class="badge">{{$remaining}}</span>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-7 col-md-offset-1">
+                        <div class="col-md-7 col-md-offset-1" style="margin-top:40px">
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Employee Details</h3>
@@ -74,6 +77,12 @@
                                         </li>
                                         <li class="list-group-item">
                                             <i class="fa fa-id-badge"></i> <b>Staff ID :</b> {{$user->staff_id}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa fa-id-badge"></i> <b>Post :</b> {{$user->post}}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa fa-id-badge"></i> <b>Scale :</b> {{$user->scale}}
                                         </li>
                                         <li class="list-group-item">
                                             <i class="fa fa-at"></i> <b>Email :</b> {{$user->email}}
@@ -92,7 +101,7 @@
                                             <i class="fa fa-building"></i> <b>Department :</b> {{$user->department}}
                                         </li>
                                         <li class="list-group-item">
-                                            <i class="fa fa-address-card-o"></i> <b>Address :</b> {{$user->address}}
+                                            <i class="fa fa-address-card-o"></i> <b>Physical Address :</b> {{$user->address}}
                                         </li>
                                         <li class="list-group-item">
                                             <i class="fa fa-phone"></i> <b>Contacts :</b> (+267) {{$user->contacts}}

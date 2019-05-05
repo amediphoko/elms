@@ -23,7 +23,8 @@
                                 <td>{{$leave->user->email}}</td>
                                 <td style="font-size:16px;"><b>Contact No. :</b></td>
                                 <td>(+267) {{$leave->user->contacts}}</td>
-                                <td>&nbsp;</td>
+                                <td style="font-size:16px;"><b>Days Applied For :</b></td>
+                                <td>{{$leave->days_applied}}</td>
                                 <td>&nbsp;</td>
                             </tr>
 
@@ -51,9 +52,11 @@
 
                             <tr>
                                 <td colspan="5">
-                                    <button class="btn btn-primary" data-toggle="modal" href="#myModal">
-                                        <i class="fa fa-pencil-square-o"></i> review leave
-                                    </button>
+                                    @if ($leave->status == 0)
+                                        <button class="btn btn-primary" data-toggle="modal" href="#myModal">
+                                            <i class="fa fa-pencil-square-o"></i> review leave
+                                        </button>
+                                    @endif
                                     {!! Form::open(['action' => ['LeavesController@update', $leave->id], 'method' => 'POST']) !!}
                                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">

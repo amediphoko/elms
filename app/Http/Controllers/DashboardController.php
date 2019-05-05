@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\LeaveDay;
 
 class DashboardController extends Controller
 {
@@ -64,7 +65,10 @@ class DashboardController extends Controller
         foreach ($leave_days as $days) {
             $total_days += $days;
         }
-        return view('employee.profile')->with(['user' => $user, 'leaves' => $leaves, 'total_days'=> $total_days]);
+        $remaining = LeaveDay::select('days')->where('user_id', $user->id)->pluck('days')->sum();
+        
+        return view('employee.profile')->with([ 'user' => $user, 'leaves' => $leaves, 
+                                                'total_days'=> $total_days, 'remaining' => $remaining]);
     }
 
     public function img_update(Request $request, $id)

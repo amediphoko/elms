@@ -5,7 +5,7 @@
     <div class="row card">
         <div class="card-content">
             <div class="card-title">Add Employee</div>
-
+            <h4 style="padding:10px"> Employee Details </h4>
             <form method="POST" action="{{ route('register') }}">
                 {{ csrf_field() }}
 
@@ -100,17 +100,6 @@
                     @endif
                 </div>
 
-                <div class="col-md-2 form-group{{ $errors->has('ps_no') ? ' has-error' : '' }}">
-                    <label for="ps_no" class="col-md-8 control-label">P.S. No</label>
-                    <input id="ps_no" type="number" class="form-control" name="ps_no" value="{{ old('ps_no') }}" required autofocus>
-
-                    @if ($errors->has('ps_no'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('ps_no') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
                 <div class="col-md-2 form-group{{ $errors->has('scale') ? ' has-error' : '' }}">
                     <label for="scale" class="col-md-4 control-label">Scale</label>
                     <select name="scale" id="scale" class="form-control">
@@ -128,8 +117,8 @@
                     @endif
                 </div>
 
-                <div class="col-md-3 form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                    <label for="address" class="col-md-4 control-label">Address</label>
+                <div class="col-md-5 form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                    <label for="address" class="col-md-10 control-label">Physical Address</label>
                     <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required autofocus>
 
                     @if ($errors->has('address'))
@@ -176,13 +165,13 @@
                     <label for="password-confirm" class="col-md-6 control-label">Confirm Password</label>
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                 </div>
-
+                
                 <div class="col-md-6 col-md-offset-4 form-group">
                     <button type="submit" class="btn btn-primary">
                         Add Employee
                     </button>
                 </div>
-            </form>
+            </form>    
         </div>
     </div>
 </div> 

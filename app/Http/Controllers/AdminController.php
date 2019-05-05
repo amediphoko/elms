@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Department;
 use App\Leave;
+use App\LeaveDay;
 
 class AdminController extends Controller
 {
@@ -35,8 +36,9 @@ class AdminController extends Controller
     public function manage()
     {
         $users = User::all();
-
-        return view('employee.manage')->with('users', $users);
+        $ids = LeaveDay::select('user_id')->distinct()->get();
+        
+        return view('employee.manage')->with(['users' => $users, 'ids' => $ids]);
     }
 
     public function edit($id)
