@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-9 col-md-offset-1" style="padding-top:30px">
             <div class="panel panel-default">
-                <div class="panel-heading">Welcome to the Leave Management System</div>
+                <div class="panel-heading" style="font-size:1.5em">Welcome to the Leave Management System</div>
 
                 <div class="panel-body">
                     @if (session('status'))

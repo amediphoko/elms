@@ -98,6 +98,9 @@ class RegisterController extends Controller
     public function sendEmail($thisUser)
     {
         Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
+        if(count(Mail::failures()) > 0) {
+            return back()->with('error', 'Account creation email failed to send, check connection.');
+        }
     }
 
     public function sendEmailDone($email, $verifyToken)

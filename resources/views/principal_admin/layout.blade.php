@@ -12,23 +12,22 @@
             </ol>
         </div>
     </section>
-    <section id="main">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="list-group">
-                        <a href="/principaladmin" class="list-group-item active main-color-bg">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard
-                        </a>
-                        <?php
-                            $users = App\User::all();
-                        ?>
-                        <a href="/manage" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Manage Staff <span class="badge">{{count($users)}}</span></a>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="/principaladmin" class="list-group-item active main-color-bg">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard
+                    </a>
+                    <?php
+                        $users = App\User::all();
+                        $departments = App\Department::all();
+                    ?>
+                    <a href="/manage" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Manage Staff <span class="badge">{{count($users)}}</span></a>
+                    <a href="/departments" class="list-group-item"><span class="fa fa-building-o" aria-hidden="true"></span> Manage Departments <span class="badge">{{count($departments)}}</span></a>
                 </div>
-                @yield('sub-contents')
             </div>
+            @yield('sub-contents')
         </div>
-    </section>
-</section>  
+    </div>
 @endsection

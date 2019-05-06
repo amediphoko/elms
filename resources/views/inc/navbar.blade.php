@@ -38,7 +38,7 @@
     
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ route('logout') }}"
+                                    <a style="color:black" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                         <span class="glyphicon glyphicon-log-out"></span> Logout
@@ -76,7 +76,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ route('logout') }}"
+                                    <a style="color:black" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                         <span class="glyphicon glyphicon-log-out"></span> Logout
@@ -90,7 +90,7 @@
                         </li>
                         @elseif (Auth::guard('principaladmin')->check())   
                         <li>
-                            <a>Welcome, </a>
+                            <p style="color:#fff;margin-top:15px;font-weight:600">Welcome, </p>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -99,7 +99,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ route('logout') }}"
+                                    <a style="color:black" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                         <span class="glyphicon glyphicon-log-out"></span> Logout

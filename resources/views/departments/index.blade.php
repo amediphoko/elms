@@ -1,18 +1,19 @@
-@extends('layouts.app')
+@extends('principal_admin.layout')
 
-@section('content')
-    <div class="container col-md-9" style="padding-left:3em; padding-top:1em">
+@section('sub-contents')
+    <div class="container col-md-9">
         <div class="row card">
             <div class="card-content">
+                    <a href="/departments/create" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</a>
                 <div class="card-title">Manage Departments</div>
                 <div class="table-responsive">
                     <table class="table table-hover" id="dt">
                         @if (count($departments) > 0)
                             <thead>
                                 <th>#</th>
-                                <th>Department Name</th>
-                                <th>Department Short Name</th>
-                                <th>Department Code</th>
+                                <th>Name</th>
+                                <th>Short Name</th>
+                                <th>Code</th>
                                 <th>Created at</th>
                                 <th></th>
                             </thead>

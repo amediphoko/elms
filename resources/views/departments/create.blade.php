@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('principal_admin.layout')
 
-@section('content')
-    <div class="container col-md-9" style="padding-left:3em; padding-top:1em">
+@section('sub-contents')
+    <div class="container col-md-9">
         <div class="row card">
             <div class="card-content">
                 <div class="card-title">Add Department</div>

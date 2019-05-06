@@ -80,26 +80,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#item-2" data-parent="#accordion1">
-                        <span class="fa fa-building-o"></span> Department</a>
-                    <div id="item-2" class="collapse">
-                    <ul class="nav flex-column ml-3">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/departments/create">
-                                <span class="glyphicon glyphicon-plus"></span> Add Department
-                                <span class="glyphicon glyphicon-triangle-left active-span"></span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/departments">
-                                <span class="fa fa-cogs"></span> Manage Department
-                                <span class="glyphicon glyphicon-triangle-left active-span"></span>
-                            </a>
-                        </li>
-                    </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#item-3" data-parent="#accordion1">
                         <span class="fa fa-angle-left"></span> <span class="fa fa-angle-right"></span> Leave Type</a>
                     <div id="item-3" class="collapse">
