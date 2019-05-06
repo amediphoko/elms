@@ -6,7 +6,7 @@
             <div class="card-content">
                 <div class="card-title">Manage Employees</div>
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="dt">
                         @if (count($users) > 0)
                             <thead>
                                 <th>#</th>

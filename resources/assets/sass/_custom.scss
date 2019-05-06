@@ -6,6 +6,10 @@
     content: "▴";
 }
 
+.navbar ul li a, .navbar .navbar-brand  {
+    color: #fff;
+}
+
 #sidebar {
     min-height: 105vh;
     -webkit-transition: margin .25s ease-out;

@@ -79,7 +79,7 @@
             
             <div class="links">
                 <a class="btn btn-default" id="emp-login" href="{{url('/login')}}">Employee Login</a>
-                <a class="btn btn-primary" id="admin-login" href="{{route('admin.login')}}">Admin Login</a>
+                <a class="btn btn-primary" id="admin-login" href="{{route('admin.login')}}">Principal Login</a>
             </div>
 
             <div class="emp-login">

@@ -26,7 +26,7 @@
 
                 <div class="col-md-2 form-group{{ $errors->has('staff_id') ? ' has-error' : '' }}">
                     <label for="staff_id">Staff Id </label>
-                    <input id="staff_id" type="number" class="form-control" name="staff_id" value="{{$user->staff_id}}" readonly>
+                    <input id="staff_id" type="text" class="form-control" name="staff_id" value="{{$user->staff_id}}" readonly>
                 </div>
 
                 <div class="col-md-2 form-group{{ $errors->has('gender') ? ' has-error' : '' }}">

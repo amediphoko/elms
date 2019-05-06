@@ -32,7 +32,7 @@
         <div class="card-content">
             <div class="card-title">Latest Leave Applications</div>
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-hover" id="dt">
                     <thead>
                         <th>#</th>
                         <th>Staff ID</th>

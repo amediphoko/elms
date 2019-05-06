@@ -90,7 +90,7 @@
                         </li>
                         @elseif (Auth::guard('principaladmin')->check())   
                         <li>
-                            <a href="">Welcome, </a>
+                            <a>Welcome, </a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -113,7 +113,10 @@
                         </li>
                     @else
                         <li>
-                            <a href="{{ route('principaladmin.login') }}">Principal Admin</a>
+                            <a href="{{ route('login') }}">Login</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('principaladmin.login') }}">Administrator</a>
                         </li>
                     @endif
             </ul>

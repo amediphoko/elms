@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-9 col-md-offset-1" style="padding-top:30px">
             <div class="panel panel-default">
-                <div class="panel-heading">User Dashboard</div>
+                <div class="panel-heading">Welcome to the Leave Management System</div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -13,8 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    <p style="padding:30px">You are now logged in!</p>
                 </div>
             </div>
         </div>

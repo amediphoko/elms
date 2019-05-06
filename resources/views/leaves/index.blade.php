@@ -6,7 +6,7 @@
             <div class="card-content">
                 <div class="card-title">Leave History</div>
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="dt">
                         @if (count($leaves) > 0)
                             <thead>
                                 <tr>

@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
 </head>
 <body>
     @include('inc.navbar')
@@ -98,5 +99,12 @@
        }
         
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#dt').DataTable();
+        })
+    </script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}" type="text/javascript"></script>
 </body>
 </html>

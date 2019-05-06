@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="list-group">
-                        <a href="index.html" class="list-group-item active main-color-bg">
+                        <a href="/principaladmin" class="list-group-item active main-color-bg">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard
                         </a>
                         <?php
