@@ -9,7 +9,7 @@
                     <div class="col-md-4 form-group">
                         {{Form::label('type', 'Leave Type')}}
                         @if (count($leavetypes) > 0)
-                            <select name="type" id="type" class="form-control">
+                            <select name="type" id="type" class="form-control" onchange="datediff()">
                                     <option value="">LeaveType..</option>
                                     @foreach ($leavetypes as $leavetype)
                                         <option value="{{$leavetype}}">{{$leavetype}}</option>
@@ -19,11 +19,11 @@
                     </div>
                     <div class="col-md-3 form-group">
                         {{Form::label('from_date', 'From Date')}}
-                        {{Form::date('from_date', '', ['class' => 'form-control', 'placeholder' => 'From Date', 'id' => 'from'])}}
+                        {{Form::date('from_date', '', ['onchange' => 'datediff()', 'id' => 'from', 'class' => 'form-control', 'placeholder' => 'From Date'])}}
                     </div>
                     <div class="col-md-3 form-group">
                         {{Form::label('to_date', 'To Date (inclusive)')}}
-                        {{Form::date('to_date', '', ['class' => 'form-control', 'placeholder' => 'To Date'])}}
+                        {{Form::date('to_date', '', ['onchange' => 'datediff()', 'id' => 'to', 'class' => 'form-control', 'placeholder' => 'To Date'])}}
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="attachments">Documents</label>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-md-3 form-group">
                         {{Form::label('days_applied', 'Total Days Applied For')}}
-                        {{Form::number('days_applied', '', ['class' => 'form-control', 'placeholder' => '# of days', 'id' => 'days_applied'])}}
+                        {{Form::number('days_applied', '', ['id' => 'days_applied', 'class' => 'form-control', 'placeholder' => '# of days', 'readonly'])}}
                     </div>
                     <div class="col-md-10 form-group">
                         {{Form::label('description', 'Reasons for application')}}

@@ -5,9 +5,11 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class PrincipalAdmin extends Authenticatable
 {
     use Notifiable;
+
+    protected $guard = 'principaladmin';
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'staff_id', 'first_name', 'last_name', 'gender', 'dob', 'department', 'address', 'contacts', 'email', 'password', 'ps_no', 'post', 'scale', 'verifyToken'
+        'name', 'email', 'password',
     ];
 
     /**
@@ -26,12 +28,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function leaves() {
-        return $this->hasMany('App\Leave');
-    }
-
-    public function department() {
-        return $this->belongsTo('App\Department');
-    }
 }

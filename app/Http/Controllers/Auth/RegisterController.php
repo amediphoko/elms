@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Mail;
 use App\User;
-use App\LeaveDay;
+use App\Mail\verifyEmail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -37,7 +39,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:admin');
+        $this->middleware('auth:principaladmin');
     }
 
     /**
@@ -72,11 +74,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'staff_id' => $data['staff_id'],
             'post' => $data['post'],
             'scale' => $data['scale'],
-            'pro_img' => 'user-default.png',
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'gender' => $data['gender'],
@@ -86,6 +87,27 @@ class RegisterController extends Controller
             'contacts' => $data['contacts'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'verifyToken' => Str::random(40),
         ]);
+
+        $thisUser = User::findOrFail($user->id);
+        $this->sendEmail($thisUser);
+        return $user;
+    }
+
+    public function sendEmail($thisUser)
+    {
+        Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
+    }
+
+    public function sendEmailDone($email, $verifyToken)
+    {
+        $user = User::where(['email' => $email, 'verifyToken' => $verifyToken])->first();
+        if ($user) {
+            User::where(['email' => $email, 'verifyToken' => $verifyToken])->update(['status' => '1', 'verifyToken' => NULL]);
+            return redirect(route('login'))->with('success', 'Account creation verified you can now login.');
+        }else {
+            return 'User not found';
+        }
     }
 }

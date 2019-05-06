@@ -1,4 +1,4 @@
-{!! Form::open(['action' => ['AdminController@update_profile', $user->id], 'method' => 'POST']) !!}
+{!! Form::open(['action' => ['PrincipalAdminController@update_profile', $user->id], 'method' => 'POST']) !!}
     {{ csrf_field() }}
 
     <div class="col-md-5 form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">

@@ -55,6 +55,16 @@ return [
             'driver' => 'token',
             'provider' => 'admins',
         ],
+
+        'principaladmin' => [
+            'driver' => 'session',
+            'provider' => 'principaladmins',
+        ],
+
+        'principaladmin-api' => [
+            'driver' => 'token',
+            'provider' => 'principaladmins',
+        ],
     ],
 
     /*
@@ -83,6 +93,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
+        ],
+
+        'principaladmins' => [
+            'driver' => 'eloquent',
+            'model' => App\PrincipalAdmin::class,
         ],
 
         // 'users' => [
@@ -115,6 +130,12 @@ return [
 
         'admins' => [
             'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 15,
+        ],
+
+        'principaladmins' => [
+            'provider' => 'principaladmins',
             'table' => 'password_resets',
             'expire' => 15,
         ],

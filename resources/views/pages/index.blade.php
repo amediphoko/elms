@@ -86,7 +86,5 @@
                 @yield('subcontent')
             </div>
         </div>
-        
     </div>
-    
 @endsection

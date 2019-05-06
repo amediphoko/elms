@@ -120,26 +120,6 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#item-4" data-parent="#accordion1">
-                        <span class="fa fa-users"></span> Employees</a>
-                    <div id="item-4" class="collapse">
-                    <ul class="nav flex-column ml-3">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('register')}}">
-                                <span class="fa fa-user-plus"></span> Add Employee
-                                <span class="glyphicon glyphicon-triangle-left active-span"></span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/manage">
-                                <span class="fa fa-cogs"></span> Manage Employee
-                                <span class="glyphicon glyphicon-triangle-left active-span"></span>
-                            </a>
-                        </li>
-                    </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#item-5" data-parent="#accordion1">
                         <span class="fa fa-desktop"></span> Leave Management</a>
                     <div id="item-5" class="collapse">

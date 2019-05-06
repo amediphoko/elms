@@ -1,11 +1,21 @@
-@extends('pages.index')
-
-@section('subcontent')
-    <div class="login col-md-8 col-md-offset-2">
-        <span style="font-size:3em; position:relative; top:12px; left:92px; color:#fff" class="glyphicon glyphicon-triangle-top"></span>
+@extends('layouts.app')
+    <style>
+        .title {
+            font-size: 40px;
+            padding-bottom: 10px;
+            text-align: center;
+            padding-top:2em;
+        }
+    </style>
+@section('content')
+    <div class="title m-b-md">
+        Nanogang Leave Management System
+    </div>
+    <div class="login col-md-6 col-md-offset-3" style="padding-top:10px">
         <div class="panel panel-default">
-            <div class="panel-body">
-                <form class="form-horizontal" method="POST" action="{{ route('admin.login.submit') }}">
+            <div class="panel-heading">Principal Admin Login</div>
+            <div class="panel-body" style="padding-top:30px">
+                <form class="form-horizontal" method="POST" action="{{ route('principaladmin.login.submit') }}">
                     {{ csrf_field() }}
 
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

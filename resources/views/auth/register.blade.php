@@ -1,56 +1,49 @@
-@extends('layouts.app')
+@extends('principal_admin.layout')
 
-@section('content')
-<div class="container col-md-9" style="padding-left:3em; padding-top:1em">
+@section('sub-contents')
+<div class="container col-md-9">
     <div class="row card">
         <div class="card-content">
             <div class="card-title">Add Employee</div>
-            <h4 style="padding:10px"> Employee Details </h4>
-            <form method="POST" action="{{ route('register') }}">
+            <h4 style="padding:10px;padding-left:30px"> Employee Details </h4>
+            <form method="POST" action="{{ route('register') }}" style="padding-left:3em">
                 {{ csrf_field() }}
 
                 <div class="col-md-5 form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                    <label for="first_name" class="col-md-4 control-label">First Name</label>
+                    <label for="first_name" class="col-md-6 control-label">First Name</label>
                     <input id="first_name" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" required autofocus>
-
-                    @if ($errors->has('first_name'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('first_name') }}</strong>
-                        </span>
-                    @endif
                 </div>
 
                 <div class="col-md-5 form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                     <label for="last_name" class="col-md-6 control-label">Last Name</label>
                     <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required autofocus>
-
-                    @if ($errors->has('last_name'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('last_name') }}</strong>
-                        </span>
-                    @endif
                 </div>
 
                 <div class="col-md-3 form-group{{ $errors->has('post') ? ' has-error' : '' }}">
                     <label for="post">Post</label>
                     <input id="post" type="text" class="form-control" name="post" value="{{ old('post') }}" required autofocus>
-
-                    @if ($errors->has('post'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('post') }}</strong>
-                        </span>
-                    @endif
                 </div>
-
+                <?php
+                    $users = App\User::all();
+                    if(count($users) > 0) {   
+                        $user = App\User::all()->last();
+                        $trim = ltrim($user->staff_id, 'S');
+                        $id = (int)$trim + 1;
+                        $len = $id !== 0 ? floor(log10($id) + 1) : 1;
+                        if ($len == 1) {
+                            $staff_id = 'S00'.$id;
+                        }elseif ($len == 2) {
+                            $staff_id = 'S0'.$id;
+                        }else{
+                            $staff_id = 'S'.$id;
+                        }
+                    }else {
+                        $staff_id = 'S001';
+                    }
+                ?>
                 <div class="col-md-2 form-group{{ $errors->has('staff_id') ? ' has-error' : '' }}">
                     <label for="staff_id">Staff Id</label>
-                    <input id="staff_id" type="number" class="form-control" name="staff_id" value="{{ old('staff_id') }}" required autofocus>
-
-                    @if ($errors->has('staff_id'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('staff_id') }}</strong>
-                        </span>
-                    @endif
+                    <input id="staff_id" type="text" class="form-control" name="staff_id" value="{{$staff_id}}" readonly>
                 </div>
 
                 <div class="col-md-2 form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
@@ -60,23 +53,11 @@
                             <option value="Female">Female</option>
                             <option value="Male">Male</option>
                     </select>
-
-                    @if ($errors->has('gender'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('gender') }}</strong>
-                        </span>
-                    @endif
                 </div>
 
                 <div class="col-md-3 form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
                     <label for="dob" class="col-md-4 control-label">DOB</label>
                     <input id="dob" type="date" class="form-control" name="dob" value="{{ old('dob') }}" required autofocus>
-
-                    @if ($errors->has('dob'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('dob') }}</strong>
-                        </span>
-                    @endif
                 </div>
 
                 <div class="col-md-3 form-group{{ $errors->has('department') ? ' has-error' : '' }}">
@@ -92,12 +73,6 @@
                                 @endforeach
                             @endif
                     </select>
-
-                    @if ($errors->has('department'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('department') }}</strong>
-                        </span>
-                    @endif
                 </div>
 
                 <div class="col-md-2 form-group{{ $errors->has('scale') ? ' has-error' : '' }}">
@@ -110,22 +85,11 @@
                             <option value="D">D</option>
                             <option value="E">E</option>   
                     </select>
-                    @if ($errors->has('scale'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('scale') }}</strong>
-                        </span>
-                    @endif
                 </div>
 
                 <div class="col-md-5 form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                     <label for="address" class="col-md-10 control-label">Physical Address</label>
                     <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required autofocus>
-
-                    @if ($errors->has('address'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('address') }}</strong>
-                        </span>
-                    @endif
                 </div>
 
                 <div class="col-md-5 form-group{{ $errors->has('contacts') ? ' has-error' : '' }}">
@@ -140,25 +104,13 @@
                 </div>
 
                 <div class="col-md-5 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="col-md-5 control-label">E-Mail Address</label>
+                    <label for="email" class="col-md-6 control-label">E-Mail Address</label>
                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                    @if ($errors->has('email'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
                 </div>
 
                 <div class="col-md-5 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     <label for="password" class="col-md-4 control-label">Password</label>
                     <input id="password" type="password" class="form-control" name="password" required>
-
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
                 </div>
 
                 <div class="col-md-5 form-group">

@@ -16,13 +16,15 @@
 <body>
     @include('inc.navbar')
     <div id="app" style="position:relative; top:3.5em">
-            <div class="col-md-2" style="margin:0; padding:0">
+        <div class="col-md-2" style="margin:0; padding:0">
+            @if (Auth::guard('web')->check() or Auth::guard('admin')->check())
                 @include('inc.sidebar')
-            </div>
-            @include('inc.messages')
-            @yield('content')   
+            @endif
+        </div>
+        @include('inc.messages')
+        @yield('content')   
     </div>
-
+    
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
@@ -55,6 +57,46 @@
            };
            reader.readAsDataURL(this.files[0]);
        };
+
+       function datediff() {
+           var to = new Date($("#to").val());
+           var from = new Date($("#from").val());
+
+           var datediff;
+
+            /**weekends included {Leave Type: Maternity}*/
+            if($("#type").val() == 'Maternity')
+            {
+                var datediff = parseInt((to - from) / (24 * 3600 * 1000));
+            }else {
+                /**exclude them weekends*/
+                if (to < from) return -1;
+
+                var dateFromDayOrig = from.getDay();
+                var dateToDayOrig = to.getDay();
+                var dateFromDay = (dateFromDayOrig == 0) ? 7 : dateFromDayOrig;
+                var dateToDay = (dateToDayOrig == 0) ? 7 : dateToDayOrig;
+                dateFromDay = (dateFromDay > 5) ? 5 : dateFromDay;
+                dateToDay = (dateToDay > 5) ? 5 : dateToDay;
+
+                var weekDifference = Math.floor((to.getTime() - from.getTime()) / 604800000);
+
+                if(dateFromDay <= dateToDay)
+                {
+                    datediff = (weekDifference * 5) + (dateToDay - dateFromDay);
+                }else {
+                    datediff = ((weekDifference + 1) * 5) - (dateFromDay - dateToDay);
+                }
+
+                if(dateFromDayOrig >= 6 || dateFromDayOrig == 0)
+                {
+                    datediff--;
+                }
+            }                
+
+            $("#days_applied").val(datediff + 1);
+       }
+        
     </script>
 </body>
 </html>

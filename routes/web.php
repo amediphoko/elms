@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', 'PagesController@index');
+Route::get('/', 'PagesController@index')->name('home');
 
 Route::get('/leave/{status}', 'LeavesController@status')->name('leaves.status-index');
 Route::resource('leaves', 'LeavesController');
+
+Route::get('verify/{email}/{verifyToken}', 'Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
 
 
 Route::resource('departments', 'DepartmentsController');
@@ -22,6 +24,10 @@ Route::resource('leavetype', 'LeaveTypeController');
 Route::resource('leavedays', 'LeaveDaysController');
 
 Auth::routes();
+
+Route::get('/manage', 'PrincipalAdminController@manage')->name('user.profile.manage');
+Route::get('/users/{id}/edit', 'PrincipalAdminController@edit')->name('user.profile.edit');
+Route::put('/update_profile/{id}', 'PrincipalAdminController@update_profile');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
@@ -33,14 +39,21 @@ Route::put('/profile/image/{id}', 'DashboardController@img_update')->name('user.
 Route::get('/change_pass/{id}', 'DashboardController@change_pass');
 Route::put('/change_password/{id}', 'DashboardController@change_password');
 
+Route::get('/manage', 'PrincipalAdminController@manage');
+Route::get('staff/dalete/{id}', 'PrincipalAdminController@destroy');
+
 Route::get('/dashboard/admin', 'AdminController@index')->name('dashboard.admin');
-Route::get('/manage', 'AdminController@manage')->name('user.profile.manage');
-Route::get('/users/{id}/edit', 'AdminController@edit')->name('user.profile.edit');
-Route::put('/update_profile/{id}', 'AdminController@update_profile');
 
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+});
+
+Route::prefix('principaladmin')->group(function(){
+    Route::get('/login', 'Auth\PrincipalAdminLoginController@showLoginForm')->name('principaladmin.login');
+    Route::post('/login', 'Auth\PrincipalAdminLoginController@login')->name('principaladmin.login.submit');
+    Route::get('/', 'PrincipalAdminController@index')->name('principaladmin.dashboard');
+    Route::get('/logout', 'Auth\PrincipalAdminLoginController@logout')->name('principaladmin.logout');
 });

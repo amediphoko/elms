@@ -74,7 +74,12 @@ class LeavesController extends Controller
         if($request->input('type') == 'Maternity') {
             $diff = $to->diffInDays($from) + 1;
         }else {
-            $diff = $to->diffInWeekdays($from) + 1; 
+            $holidays = array(  '2019-01-01', '2019-02-01', '2019-04-19', '2019-04-20', '2019-04-22',
+                                '2019-05-01', '2019-05-12', '2019-05-30', '2019-06-16', '2019-07-01',
+                                '2019-07-02', '2019-07-15', '2019-07-16', '2019-09-30', '2019-10-1',
+                                '2019-12-25', '2019-12-26');
+
+            $diff = $to->diffInWeekdays($from) + 1;
         }
     
         if($request->input('days_applied') != $diff) {
